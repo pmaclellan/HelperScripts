@@ -5,6 +5,7 @@ import sys
 from os import listdir
 import os.path
 from PIL import Image
+from tqdm import tqdm
 
 def testEqual(expected, actual):
 	if  actual == expected:
@@ -60,7 +61,7 @@ if __name__ == "__main__":
 
 	accepted_formats = ["jpg", "jpeg", "JPG", "JPEG"]
 	image_files = [str(f) for f in listdir(source_dir) if f.split(".")[-1] in accepted_formats]
-	for image in image_files:
+	for image in tqdm(image_files, desc="Processing"):
 		filename = image.split(".")[0]
 		start_image = Image.open(os.path.join(source_dir, image))
 		# print "Starting size is %s" % (start_image.size,)
